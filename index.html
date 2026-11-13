@@ -7,7 +7,7 @@
 <meta name="description" content="Hannibal Control is a complete vocal chain in one VST3 plugin: pitch correction with maqam scales, preamps, dynamic EQ, FET and opto compression, de-esser, saturation, doubler, effects and a true-peak limiter.">
 <meta property="og:title" content="Hannibal Control — Vocal Chain">
 <meta property="og:description" content="A full vocal chain in one plugin. Windows VST3. $25.">
-<meta property="og:image" content="img/eq.webp">
+<meta property="og:image" content="img/eq-dynamic.webp">
 <link rel="icon" href="img/medal.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,6 +63,22 @@ a{color:inherit}
 .flow .arrow{color:var(--line);font-size:14px}
 .stage{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:36px;align-items:start}
 .stage figure{margin:0;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 0 60px -30px var(--accent);transition:box-shadow .4s}
+.views{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:12px}
+.views button{appearance:none;background:none;border:0;padding:0;cursor:pointer;color:var(--muted);font:500 13px/1.3 var(--sans);text-align:left}
+.views img{border-radius:6px;box-shadow:0 0 0 1px var(--line);opacity:.6;transition:opacity .2s}
+.views span{display:block;margin-top:6px}
+.views button[aria-pressed="true"] img{opacity:1;box-shadow:0 0 0 2px var(--accent)}
+.views button[aria-pressed="true"]{color:var(--bone)}
+.views button:hover img{opacity:1}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:26px}
+.gallery button{appearance:none;background:none;border:0;padding:0;cursor:zoom-in;text-align:left;color:var(--bone);font:500 15px/1.35 var(--sans)}
+.gallery img{border-radius:8px;box-shadow:0 0 0 1px var(--line),0 12px 30px -16px rgba(0,0,0,.8)}
+.gallery small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.gallery span{display:block;margin-top:9px}
+dialog#zoom{max-width:min(1240px,96vw);width:100%;padding:0;border:0;border-radius:12px;background:var(--panel);color:var(--bone)}
+dialog#zoom::backdrop{background:rgba(0,0,0,.82)}
+dialog#zoom p{margin:0;padding:12px 18px 16px;color:var(--muted)}
+dialog#zoom .close{position:absolute;top:8px;right:10px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:24px;cursor:pointer}
 .detail h3{font:700 26px/1.2 var(--serif);color:var(--accent);margin:0 0 6px;transition:color .3s}
 .detail .insp{color:var(--muted);font-size:15px;margin:0 0 16px}
 .detail ul{margin:0;padding:0;list-style:none}
@@ -106,7 +122,7 @@ footer p{margin:0 0 6px}
 
 <header class="wrap top">
   <a class="brand" href="#"><img src="img/medal.webp" alt=""><span>HANNIBAL CONTROL</span></a>
-  <nav aria-label="Page"><a href="#chain">The chain</a><a href="#specs">Specs</a><a href="#buy">Buy</a></nav>
+  <nav aria-label="Page"><a href="#chain">The chain</a><a href="#screens">Screens</a><a href="#specs">Specs</a><a href="#buy">Buy</a></nav>
 </header>
 
 <main>
@@ -121,18 +137,19 @@ footer p{margin:0 0 6px}
     </div>
     <p class="note">Windows · VST3 64-bit · Standalone app included</p>
   </div>
-  <div class="hero-shot"><img src="img/eq.webp" width="1220" height="700" alt="Hannibal Control dynamic EQ page with the analyzer and band panel open"></div>
+  <div class="hero-shot"><img src="img/eq-dynamic.webp" width="1220" height="700" alt="Hannibal Control dynamic EQ page with the analyzer and band panel open"></div>
 </section>
 
 <section class="chain" id="chain">
  <div class="wrap">
   <h2>Nine stages, in signal order</h2>
-  <p>The tabs follow the order the voice travels through the plugin. Pick a stage to see its face.</p>
+  <p>The tabs follow the order the voice travels through the plugin. Pick a stage to see its screens. 18 screens in all.</p>
 
   <div class="flow" role="tablist" aria-label="Processing stages"></div>
 
   <div class="stage">
-    <figure><img id="face" src="img/tune.webp" width="1220" height="700" alt=""></figure>
+    <div><figure><img id="face" src="img/tune.webp" width="1220" height="700" alt=""></figure>
+    <div class="views" id="views" aria-label="Screens of this stage"></div></div>
     <div class="detail" role="tabpanel" aria-live="polite">
       <h3 id="d-name"></h3>
       <p class="insp" id="d-insp"></p>
@@ -140,6 +157,15 @@ footer p{margin:0 0 6px}
     </div>
   </div>
  </div>
+</section>
+
+<section class="section" id="screens">
+ <div class="wrap">
+  <h2>Every screen</h2>
+  <p>All 18 screens of the plugin. Tap one to see it full size.</p>
+  <div class="gallery" id="gallery"></div>
+ </div>
+ <dialog id="zoom" aria-label="Screen full size"><form method="dialog"><button class="close" aria-label="Close">×</button></form><img id="zoom-img" src="" alt=""><p id="zoom-cap"></p></dialog>
 </section>
 
 <section class="section" id="specs">
@@ -238,16 +264,28 @@ const btns=STAGES.map((s,i)=>{
   b.onkeydown=e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();const n=(i+(e.key==="ArrowRight"?1:STAGES.length-1))%STAGES.length;show(n,true);btns[n].focus();}};
   flow.appendChild(b);return b;
 });
-STAGES.forEach(s=>{const im=new Image();im.src=`img/${s.id}.webp`;});
+const FACES={"tune": [["tune", "Pitch correction"], ["tune-advanced", "Advanced settings"]], "pre": [["pre", "73 and VB preamps"], ["pre-rider", "Vocal rider"]], "eq": [["eq-dynamic", "Dynamic band editing"], ["eq-sidechain", "Clash view against the beat"], ["eq-resonance", "Resonance detection"]], "comp": [["comp", "Gate, 76 and 2A"]], "ds": [["ds", "De-esser"]], "sat": [["sat", "Six colour modules"]], "dbl": [["dbl", "Doubler and choir"]], "fx": [["fx-reverb", "Reverb"], ["fx-delay", "Delay"], ["fx-chorus", "Chorus"], ["fx-lofi", "Lo-fi"], ["fx-bender", "Bender"]], "limit": [["limit", "True-peak limiter"]]};
+Object.values(FACES).flat().forEach(([f])=>{const im=new Image();im.src=`img/${f}.webp`;});
+const views=document.getElementById("views");
+function showFace(f,cap,s){face.src=`img/${f}.webp`;face.alt=`Hannibal Control, ${s.name}: ${cap}`;views.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f));}
 function show(i){
   const s=STAGES[i];
   btns.forEach((b,k)=>{b.setAttribute("aria-selected",k===i);b.tabIndex=k===i?0:-1;});
   document.documentElement.style.setProperty("--accent",s.c);
-  face.src=`img/${s.id}.webp`; face.alt=`Hannibal Control ${s.name} page`;
+  const fs=FACES[s.id];
+  views.innerHTML=fs.length>1?fs.map(([f,cap])=>`<button type="button" data-f="${f}" aria-pressed="false"><img src="img/${f}.webp" alt="" width="1220" height="700"><span>${cap}</span></button>`).join(""):"";
+  views.querySelectorAll("button").forEach((b,k)=>b.onclick=()=>showFace(fs[k][0],fs[k][1],s));
+  showFace(fs[0][0],fs[0][1],s);
   dn.textContent=s.name; di.textContent=s.insp;
   dl.innerHTML=s.pts.map(p=>`<li>${p}</li>`).join("");
 }
 show(0);
+const gal=document.getElementById("gallery"),zoom=document.getElementById("zoom");
+STAGES.forEach(st=>FACES[st.id].forEach(([f,cap])=>{const b=document.createElement("button");b.type="button";
+ b.innerHTML=`<img src="img/${f}.webp" width="1220" height="700" loading="lazy" alt="Hannibal Control, ${st.name}: ${cap}"><span>${cap}<small>${st.name}</small></span>`;
+ b.onclick=()=>{document.getElementById("zoom-img").src=`img/${f}.webp`;document.getElementById("zoom-img").alt=`${st.name}: ${cap}`;document.getElementById("zoom-cap").textContent=`${st.name} · ${cap}`;zoom.showModal();};
+ gal.appendChild(b);}));
+zoom.addEventListener("click",e=>{if(e.target===zoom)zoom.close();});
 
 /* Settings: PayPal payment link and contact address. */
 const PAYPAL_URL="";
