@@ -130,7 +130,7 @@ footer p{margin:0 0 6px}
   <div>
     <img class="medal" src="img/medal.webp" width="240" height="240" alt="Hannibal Control medal logo">
     <h1>Hannibal<small>Vocal Chain</small></h1>
-    <p class="lead">Your whole vocal chain in one plugin. Tune, preamp, EQ, compression, de-essing, colour, doubling, effects and a final limiter, wired in the right order.</p>
+    <p class="lead">Your whole vocal chain in one plugin. Level riding, tune, preamp, EQ, compression, de-essing, colour, doubling, effects and a final limiter, wired in the right order.</p>
     <div class="buy-row">
       <div class="price"><sup>$</sup>25</div>
       <a class="btn buy" href="#buy" aria-disabled="true">Coming soon</a>
@@ -142,8 +142,8 @@ footer p{margin:0 0 6px}
 
 <section class="chain" id="chain">
  <div class="wrap">
-  <h2>Nine stages, in signal order</h2>
-  <p>The tabs follow the order the voice travels through the plugin. Pick a stage to see its screens. 18 screens in all.</p>
+  <h2>Ten stages, in signal order</h2>
+  <p>The tabs follow the order the voice travels through the plugin. Pick a stage to see its screens. 19 screens in all.</p>
 
   <div class="flow" role="tablist" aria-label="Processing stages"></div>
 
@@ -162,7 +162,7 @@ footer p{margin:0 0 6px}
 <section class="section" id="screens">
  <div class="wrap">
   <h2>Every screen</h2>
-  <p>All 18 screens of the plugin. Tap one to see it full size.</p>
+  <p>All 19 screens of the plugin. Tap one to see it full size.</p>
   <div class="gallery" id="gallery"></div>
  </div>
  <dialog id="zoom" aria-label="Screen full size"><form method="dialog"><button class="close" aria-label="Close">×</button></form><img id="zoom-img" src="" alt=""><p id="zoom-cap"></p></dialog>
@@ -234,6 +234,8 @@ footer p{margin:0 0 6px}
 
 <script>
 const STAGES = [
+ {id:"rider", c:"#f0a43a", name:"Rider", insp:"An automatic fader that keeps the vocal level steady before anything else touches it.",
+  pts:["Rides the volume up and down in real time, so the chain always gets an even voice","Target, range, speed and sensitivity: breaths and silences are left alone","Write auto copies the rider's moves into your DAW automation","Auto level: sing for 3 seconds and the input is set so the presets hit as designed"]},
  {id:"tune", c:"#ff4d4d", name:"Tune", insp:"Real-time pitch correction, from natural to hard-tuned robot.",
   pts:["18 scales, including maqam Rast, Bayati and Saba with quarter tones","Retune speed, humanize, vibrato and formant control","Auto key detection, transpose, live pitch graph"]},
  {id:"pre", c:"#e3b341", name:"Pre", insp:"Two preamps: a British transformer console and a tube vocal channel.",
@@ -264,7 +266,7 @@ const btns=STAGES.map((s,i)=>{
   b.onkeydown=e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();const n=(i+(e.key==="ArrowRight"?1:STAGES.length-1))%STAGES.length;show(n,true);btns[n].focus();}};
   flow.appendChild(b);return b;
 });
-const FACES={"tune": [["tune", "Pitch correction"], ["tune-advanced", "Advanced settings"]], "pre": [["pre", "73 and VB preamps"], ["pre-rider", "Vocal rider"]], "eq": [["eq-dynamic", "Dynamic band editing"], ["eq-sidechain", "Clash view against the beat"], ["eq-resonance", "Resonance detection"]], "comp": [["comp", "Gate, 76 and 2A"]], "ds": [["ds", "De-esser"]], "sat": [["sat", "Six colour modules"]], "dbl": [["dbl", "Doubler and choir"]], "fx": [["fx-reverb", "Reverb"], ["fx-delay", "Delay"], ["fx-chorus", "Chorus"], ["fx-lofi", "Lo-fi"], ["fx-bender", "Bender"]], "limit": [["limit", "True-peak limiter"]]};
+const FACES={"tune": [["tune", "Pitch correction"], ["tune-advanced", "Advanced settings"]], "rider": [["rider-panel", "Rider close-up"], ["pre-rider", "Rider in the plugin"]], "pre": [["pre", "73 and VB preamps"]], "eq": [["eq-dynamic", "Dynamic band editing"], ["eq-sidechain", "Clash view against the beat"], ["eq-resonance", "Resonance detection"]], "comp": [["comp", "Gate, 76 and 2A"]], "ds": [["ds", "De-esser"]], "sat": [["sat", "Six colour modules"]], "dbl": [["dbl", "Doubler and choir"]], "fx": [["fx-reverb", "Reverb"], ["fx-delay", "Delay"], ["fx-chorus", "Chorus"], ["fx-lofi", "Lo-fi"], ["fx-bender", "Bender"]], "limit": [["limit", "True-peak limiter"]]};
 Object.values(FACES).flat().forEach(([f])=>{const im=new Image();im.src=`img/${f}.webp`;});
 const views=document.getElementById("views");
 function showFace(f,cap,s){face.src=`img/${f}.webp`;face.alt=`Hannibal Control, ${s.name}: ${cap}`;views.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f));}
