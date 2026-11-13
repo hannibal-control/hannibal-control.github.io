@@ -295,12 +295,12 @@ STAGES.forEach(st=>FACES[st.id].forEach(([f,cap])=>{const b=document.createEleme
 zoom.addEventListener("click",e=>{if(e.target===zoom)zoom.close();});
 
 /* Settings: PayPal payment link, demo download page and contact address. */
-const PAYPAL_URL="";
+const PAYPAL_URL="https://www.paypal.me/hannibalcontrol/25USD";
 const DEMO_URL="";
-const CONTACT_EMAIL="";
+const CONTACT_EMAIL="hannibalaudiocontrol@gmail.com";
 if(DEMO_URL){document.querySelectorAll(".demo").forEach(a=>{a.href=DEMO_URL;a.hidden=false;});}
 if(PAYPAL_URL){document.querySelectorAll(".buy").forEach(a=>{a.href=PAYPAL_URL;a.target="_blank";a.rel="noopener";a.removeAttribute("aria-disabled");a.textContent="Buy with PayPal";});
-  document.getElementById("buy-note").textContent="Pay with PayPal (balance or card). Your personal licence key is sent to your PayPal email within 24 hours. It unlocks the free demo: no reinstall needed.";}
+  document.getElementById("buy-note").textContent=DEMO_URL?"Pay with PayPal (balance or card). Your personal licence key is sent to your PayPal email within 24 hours. It unlocks the free demo: no reinstall needed.":"Pay with PayPal (balance or card). Your download link and personal licence key are sent to your PayPal email within 24 hours.";}
 if(CONTACT_EMAIL){const m=document.getElementById("mail");m.href="mailto:"+CONTACT_EMAIL;m.textContent=CONTACT_EMAIL;document.getElementById("mail-line").hidden=false;}
 </script>
 </body>
