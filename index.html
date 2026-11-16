@@ -3,308 +3,104 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hannibal Control — Vocal Chain plugin</title>
-<meta name="description" content="Hannibal Control is a complete vocal chain in one VST3 plugin: pitch correction with maqam scales, preamps, dynamic EQ, FET and opto compression, de-esser, saturation, doubler, effects and a true-peak limiter.">
-<meta property="og:title" content="Hannibal Control — Vocal Chain">
-<meta property="og:description" content="A full vocal chain in one plugin. Windows VST3. $25.">
-<meta property="og:image" content="img/eq-dynamic.webp">
-<link rel="icon" href="img/medal.webp">
-<link rel="canonical" href="https://hannibal-control.github.io/">
+<title>Hannibal Control — audio plugins</title>
+<meta name="description" content="Hannibal Control audio plugins: complete processing chains in one plugin. Windows VST3, free demo, $25 each.">
+<meta property="og:title" content="Hannibal Control — audio plugins">
+<meta property="og:description" content="Complete processing chains in one plugin. Windows VST3, free demo.">
+<meta property="og:image" content="vocal-chain/img/eq-dynamic.webp">
 <meta property="og:url" content="https://hannibal-control.github.io/">
+<link rel="canonical" href="https://hannibal-control.github.io/">
+<link rel="icon" href="vocal-chain/img/medal.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --page:#16171b; --panel:#202228; --line:#30323a;
-  --bone:#f4efe3; --muted:#b4afa4; --gold:#e8bb5c; --gold-deep:#a9822f;
-  --accent:#e8bb5c;
+  --bone:#f4efe3; --muted:#b4afa4; --gold:#e8bb5c;
   --serif:"Cinzel", "Trajan Pro", Georgia, serif;
   --sans:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 *{box-sizing:border-box}
-[hidden]{display:none!important}
-html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(1200px 700px at 22% 8%,rgba(232,187,92,.16),transparent 60%),radial-gradient(900px 600px at 85% 20%,rgba(60,200,240,.10),transparent 60%),linear-gradient(180deg,#1d1f25 0,var(--page) 900px);color:var(--bone);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+html{background:var(--page)}
+body{margin:0;background:radial-gradient(1100px 600px at 20% 0%,rgba(232,187,92,.12),transparent 60%),linear-gradient(180deg,#1d1f25 0,var(--page) 700px);color:var(--bone);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:6px}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-
-/* top */
-.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand img{width:46px;height:46px;border-radius:50%;box-shadow:0 0 0 1px rgba(232,187,92,.5),0 4px 14px rgba(0,0,0,.6)}
-.brand span{font:700 19px/1 var(--serif);letter-spacing:.14em;color:var(--gold)}
-.top nav a{color:var(--muted);text-decoration:none;margin-left:26px;font-size:15px}
-.top nav a:hover{color:var(--bone)}
-
-/* hero */
-.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:center;padding:48px 0 72px}
-.medal{width:150px;height:150px;border-radius:50%;margin:0 0 26px;box-shadow:0 0 0 2px rgba(232,187,92,.55),0 0 0 7px rgba(232,187,92,.08),0 18px 40px rgba(0,0,0,.75),0 0 70px rgba(232,187,92,.28);filter:contrast(1.08) brightness(1.06)}
-.hero h1{background:linear-gradient(180deg,#fbe3a4 0%,#e8bb5c 45%,#b98a35 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 3px 0 rgba(0,0,0,.55)) drop-shadow(0 8px 18px rgba(0,0,0,.6));font:700 clamp(44px,6.2vw,82px)/.98 var(--serif);letter-spacing:.04em;margin:0;color:var(--gold)}
-.hero h1 small{display:block;font:500 clamp(18px,2vw,24px)/1.2 var(--serif);letter-spacing:.42em;color:var(--bone);margin-top:14px}
-.hero p.lead{font-size:20px;line-height:1.55;color:var(--bone);margin:30px 0 0;max-width:30ch}
-.buy-row{display:flex;align-items:center;gap:22px;margin-top:34px;flex-wrap:wrap}
-.price{font:700 40px/1 var(--serif);color:var(--bone)}
-.price sup{font-size:.5em;vertical-align:.6em;margin-right:2px}
-.btn{display:inline-block;padding:15px 28px;border-radius:999px;background:var(--gold);color:#17140c;font-weight:700;text-decoration:none;border:0;font-size:16px;cursor:pointer}
-.btn:hover{background:#e0bd73}
-.btn[aria-disabled="true"]{background:transparent;color:var(--gold);box-shadow:inset 0 0 0 1.5px var(--gold-deep);cursor:default}
-.btn.ghost{background:transparent;color:var(--gold);box-shadow:inset 0 0 0 1.5px var(--gold-deep)}
-.btn.ghost:hover{background:rgba(232,187,92,.1)}
-.note{color:var(--muted);font-size:14px;margin-top:14px}
-.hero-shot{border-radius:14px;overflow:hidden;box-shadow:0 40px 90px -30px rgba(0,0,0,.9),0 0 0 1px #3a3d46,0 0 80px -20px rgba(60,200,240,.35)}
-
-/* chain */
-.chain{padding:64px 0 40px;border-top:1px solid var(--line)}
-.chain h2,.section h2,.final h2{font:700 clamp(28px,3.4vw,40px)/1.15 var(--serif);letter-spacing:.03em;margin:0 0 10px}
-.chain>.wrap>p{color:var(--muted);max-width:62ch;margin:0 0 30px}
-.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:22px}
-.flow button{appearance:none;font:700 14px/1 var(--sans);letter-spacing:.08em;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:8px}
-.flow button i{width:8px;height:8px;border-radius:50%;background:var(--c);opacity:.45}
-.flow button[aria-selected="true"]{color:var(--bone);border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 0 22px -6px var(--c)}
-.flow button[aria-selected="true"] i{opacity:1;box-shadow:0 0 10px var(--c)}
-.flow .arrow{color:var(--line);font-size:14px}
-.stage{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:36px;align-items:start}
-.stage figure{margin:0;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 0 60px -30px var(--accent);transition:box-shadow .4s}
-.views{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:12px}
-.views button{appearance:none;background:none;border:0;padding:0;cursor:pointer;color:var(--muted);font:500 13px/1.3 var(--sans);text-align:left}
-.views img{border-radius:6px;box-shadow:0 0 0 1px var(--line);opacity:.6;transition:opacity .2s}
-.views span{display:block;margin-top:6px}
-.views button[aria-pressed="true"] img{opacity:1;box-shadow:0 0 0 2px var(--accent)}
-.views button[aria-pressed="true"]{color:var(--bone)}
-.views button:hover img{opacity:1}
-.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:26px}
-.gallery button{appearance:none;background:none;border:0;padding:0;cursor:zoom-in;text-align:left;color:var(--bone);font:500 15px/1.35 var(--sans)}
-.gallery img{border-radius:8px;box-shadow:0 0 0 1px var(--line),0 12px 30px -16px rgba(0,0,0,.8)}
-.gallery small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
-.gallery span{display:block;margin-top:9px}
-dialog#zoom{max-width:min(1240px,96vw);width:100%;padding:0;border:0;border-radius:12px;background:var(--panel);color:var(--bone)}
-dialog#zoom::backdrop{background:rgba(0,0,0,.82)}
-dialog#zoom p{margin:0;padding:12px 18px 16px;color:var(--muted)}
-dialog#zoom .close{position:absolute;top:8px;right:10px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:24px;cursor:pointer}
-.detail h3{font:700 26px/1.2 var(--serif);color:var(--accent);margin:0 0 6px;transition:color .3s}
-.detail .insp{color:var(--muted);font-size:15px;margin:0 0 16px}
-.detail ul{margin:0;padding:0;list-style:none}
-.detail li{padding:9px 0;border-top:1px solid var(--line);font-size:15.5px}
-
-/* sections */
-.section{padding:72px 0;border-top:1px solid var(--line)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:56px}
-.section p{max-width:60ch}
-dl.specs{display:grid;grid-template-columns:minmax(150px,auto) 1fr;margin:20px 0 0;gap:0}
-dl.specs dt,dl.specs dd{padding:11px 0;border-top:1px solid var(--line);margin:0}
-dl.specs dt{color:var(--muted);padding-right:20px}
-.presets{columns:2;column-gap:30px;margin:20px 0 0;padding:0;list-style:none;font-size:15.5px}
-.presets li{padding:4px 0;break-inside:avoid;color:var(--bone)}
-.presets li span{color:var(--muted)}
-.final{text-align:center;padding:90px 0}
-.final .price{font-size:56px}
-.final .buy-row{justify-content:center}
-.final .note{max-width:52ch;margin:16px auto 0}
-footer{border-top:1px solid var(--line);padding:34px 0 50px;color:var(--muted);font-size:14px}
+header{display:flex;align-items:center;gap:22px;padding:56px 0 40px}
+.medal{width:96px;height:96px;border-radius:50%;flex:none;box-shadow:0 0 0 2px rgba(232,187,92,.55),0 14px 30px rgba(0,0,0,.7)}
+h1{font:700 clamp(34px,4.6vw,56px)/1 var(--serif);letter-spacing:.06em;margin:0;color:var(--gold)}
+header p{margin:10px 0 0;color:var(--muted);max-width:52ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px;padding:10px 0 80px}
+.card{display:block;text-decoration:none;background:var(--panel);border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 24px 50px -28px rgba(0,0,0,.9)}
+.card:hover{box-shadow:0 0 0 1px var(--c),0 24px 50px -28px rgba(0,0,0,.9)}
+.card .body{padding:18px 20px 20px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.card h2{font:700 24px/1.15 var(--serif);margin:0;color:var(--c)}
+.card p{margin:6px 0 0;color:var(--muted);font-size:15px}
+.card .price{font:700 26px/1 var(--serif);color:var(--bone);white-space:nowrap}
+.card .price small{display:block;font:500 13px/1.4 var(--sans);color:var(--muted);margin-top:6px;text-align:right}
+footer{border-top:1px solid var(--line);padding:30px 0 46px;color:var(--muted);font-size:14px}
 footer .wrap{display:grid;grid-template-columns:1fr 1fr;gap:30px}
-footer h4{font:500 15px/1.3 var(--sans);color:var(--bone);margin:0 0 6px}
+footer h3{font:500 15px/1.3 var(--sans);color:var(--bone);margin:0 0 6px}
 footer p{margin:0 0 6px}
-
-@media (max-width:900px){
-  .hero,.stage,.two,footer .wrap{grid-template-columns:1fr}
-  .hero{gap:36px;padding-top:24px}
-  .top nav{display:none}
-  .presets{columns:1}
-  .flow .arrow{display:none}
+@media (max-width:700px){
+  header{flex-direction:column;align-items:flex-start;padding-top:36px}
+  .grid{grid-template-columns:1fr}
+  footer .wrap{grid-template-columns:1fr}
 }
-@media (max-width:520px){
-  .wrap{padding:0 16px}
-  body{font-size:16px}
-  .flow button{padding:10px 11px;font-size:13px}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:520px){.wrap{padding:0 16px}}
 </style>
 </head>
 <body>
-
-<header class="wrap top">
-  <a class="brand" href="#"><img src="img/medal.webp" alt=""><span>HANNIBAL CONTROL</span></a>
-  <nav aria-label="Page"><a href="kick-chain/">Kick Chain</a><a href="#chain">The chain</a><a href="#screens">Screens</a><a href="#specs">Specs</a><a href="#buy">Buy</a></nav>
-</header>
-
-<main>
-<section class="wrap hero">
-  <div>
-    <img class="medal" src="img/medal.webp" width="240" height="240" alt="Hannibal Control medal logo">
-    <h1>Hannibal<small>Vocal Chain</small></h1>
-    <p class="lead">Your whole vocal chain in one plugin. Level riding, tune, preamp, EQ, compression, de-essing, colour, doubling, effects and a final limiter, wired in the right order.</p>
-    <div class="buy-row">
-      <div class="price"><sup>$</sup>25</div>
-      <a class="btn buy" href="#buy" aria-disabled="true">Coming soon</a>
-      <a class="btn ghost demo" href="#" hidden download>Free demo</a>
+<main class="wrap">
+  <header>
+    <img class="medal" src="vocal-chain/img/medal.webp" width="240" height="240" alt="Hannibal Control medal logo">
+    <div>
+      <h1>Hannibal Control</h1>
+      <p>Complete processing chains, each in one plugin. Windows VST3, free demo, $25 each.</p>
     </div>
-    <p class="note">Windows · VST3 64-bit · Standalone app included · The demo mutes for 2 seconds every minute until unlocked</p>
-  </div>
-  <div class="hero-shot"><img src="img/eq-dynamic.webp" width="1220" height="700" alt="Hannibal Control dynamic EQ page with the analyzer and band panel open"></div>
-</section>
+  </header>
 
-<section class="chain" id="chain">
- <div class="wrap">
-  <h2>Ten stages, in signal order</h2>
-  <p>The tabs follow the order the voice travels through the plugin. Pick a stage to see its screens. 19 screens in all.</p>
+  <!-- Pour ajouter un plugin : copier un bloc <a class="card">…</a>, changer le lien, l'image, la couleur (--c), le nom et le texte. -->
+  <section class="grid" aria-label="Plugins">
+    <a class="card" href="vocal-chain/" style="--c:#e8bb5c">
+      <img src="vocal-chain/img/eq-dynamic.webp" width="1220" height="700" alt="Hannibal Vocal Chain plugin">
+      <div class="body">
+        <div>
+          <h2>Hannibal Vocal Chain</h2>
+          <p>Rider, tune, preamps, EQ, compression, de-esser, saturation, doubler, effects and limiter.</p>
+        </div>
+        <div class="price">$25<small>Free demo</small></div>
+      </div>
+    </a>
 
-  <div class="flow" role="tablist" aria-label="Processing stages"></div>
-
-  <div class="stage">
-    <div><figure><img id="face" src="img/tune.webp" width="1220" height="700" alt=""></figure>
-    <div class="views" id="views" aria-label="Screens of this stage"></div></div>
-    <div class="detail" role="tabpanel" aria-live="polite">
-      <h3 id="d-name"></h3>
-      <p class="insp" id="d-insp"></p>
-      <ul id="d-list"></ul>
-    </div>
-  </div>
- </div>
-</section>
-
-<section class="section" id="screens">
- <div class="wrap">
-  <h2>Every screen</h2>
-  <p>All 19 screens of the plugin. Tap one to see it full size.</p>
-  <div class="gallery" id="gallery"></div>
- </div>
- <dialog id="zoom" aria-label="Screen full size"><form method="dialog"><button class="close" aria-label="Close">×</button></form><img id="zoom-img" src="" alt=""><p id="zoom-cap"></p></dialog>
-</section>
-
-<section class="section" id="specs">
- <div class="wrap two">
-  <div>
-    <h2>Specifications</h2>
-    <dl class="specs">
-      <dt>Format</dt><dd>VST3 (64-bit) and standalone app</dd>
-      <dt>System</dt><dd>Windows 10 or 11, 64-bit</dd>
-      <dt>Tested in</dt><dd>FL Studio 21. Should run in any VST3 host.</dd>
-      <dt>macOS</dt><dd>In preparation (AU and VST3)</dd>
-      <dt>Presets</dt><dd>28 factory chains, your own presets, per-module presets</dd>
-      <dt>Workflow</dt><dd>A/B compare, undo / redo, bypass, mono check, phase, dry / processed mix</dd>
-      <dt>Before the chain</dt><dd>Vocal rider and auto level keep the input steady</dd>
-      <dt>Controls</dt><dd>Fine mouse-wheel steps, double-click to type a value, Alt+click to reset</dd>
-      <dt>Demo</dt><dd>Every feature, with 2 seconds of silence each minute until you enter your key</dd>
-      <dt>Licence</dt><dd>One user, your own computers. Offline activation, no account needed.</dd>
-    </dl>
-  </div>
-  <div>
-    <h2>Starting points</h2>
-    <p>Every factory preset sets up the whole chain for a style. Load one, then adjust.</p>
-    <ul class="presets">
-      <li>Rap <span>lead, female lead, old school, ad-libs</span></li>
-      <li>Trap <span>modern lead, lead + tune, psychedelic hard tune</span></li>
-      <li>Raï <span>modern lead, love + tune</span></li>
-      <li>Oriental <span>mawal</span></li>
-      <li>R&amp;B <span>smooth male, silk female, + tune</span></li>
-      <li>Pop <span>bright lead, ballad, doubled chorus</span></li>
-      <li>Afro <span>lead, lead + tune</span></li>
-      <li>Electro <span>festival lead, hook + tune</span></li>
-      <li>Ragga and dub <span>dancehall lead, echo chamber</span></li>
-      <li>Spoken <span>podcast, radio host</span></li>
-      <li>Effects <span>telephone, vintage radio, wide choir</span></li>
-    </ul>
-  </div>
- </div>
-</section>
-
-<section class="final" id="buy">
- <div class="wrap">
-  <h2>Hannibal Control Vocal Chain</h2>
-  <div class="buy-row" style="margin-top:22px">
-    <div class="price"><sup>$</sup>25</div>
-    <a class="btn buy" href="#buy" aria-disabled="true">Coming soon</a>
-      <a class="btn ghost demo" href="#" hidden download>Free demo</a>
-  </div>
-  <p class="note" id="buy-note">Sales open shortly. Payment through PayPal, by PayPal balance or card. Your download link is sent by email within 24 hours of payment.</p>
- </div>
-</section>
+    <a class="card" href="kick-chain/" style="--c:#c27bff">
+      <img src="kick-chain/img/tune.webp" width="1220" height="700" alt="Hannibal Kick Chain plugin">
+      <div class="body">
+        <div>
+          <h2>Hannibal Kick Chain</h2>
+          <p>Clean-up, tuning, punch, EQ, compression, saturation, sub, filter, effects, clipper and output.</p>
+        </div>
+        <div class="price">$25<small>Free demo</small></div>
+      </div>
+    </a>
+  </section>
 </main>
 
 <footer>
  <div class="wrap">
   <div>
-    <h4>Contact</h4>
-    <p id="mail-line" hidden><a id="mail" href="#"></a></p>
+    <h3>Contact</h3>
+    <p><a href="mailto:hannibalaudiocontrol@gmail.com">hannibalaudiocontrol@gmail.com</a></p>
     <p>Hannibal Control by Exod.Mkrz</p>
   </div>
   <div>
-    <h4>Legal notice</h4>
+    <h3>Legal notice</h3>
     <p>Publisher: Raphaël Ouni, France. Hosting: GitHub Pages, GitHub Inc., San Francisco, USA.</p>
-    <p>The modules are inspired by the sound of classic studio hardware. They are original designs, not circuit emulations, and are not affiliated with any hardware maker.</p>
     <p>VST is a registered trademark of Steinberg Media Technologies GmbH.</p>
   </div>
  </div>
 </footer>
-
-<script>
-const STAGES = [
- {id:"rider", c:"#f0a43a", name:"Rider", insp:"An automatic fader that keeps the vocal level steady before anything else touches it.",
-  pts:["Rides the volume up and down in real time, so the chain always gets an even voice","Target, range, speed and sensitivity: breaths and silences are left alone","Write auto copies the rider's moves into your DAW automation","Auto level: sing for 3 seconds and the input is set so the presets hit as designed"]},
- {id:"tune", c:"#ff4d4d", name:"Tune", insp:"Real-time pitch correction, from natural to hard-tuned robot.",
-  pts:["18 scales, including maqam Rast, Bayati and Saba with quarter tones","Retune speed, humanize, vibrato and formant control","Auto key detection, transpose, live pitch graph"]},
- {id:"pre", c:"#e3b341", name:"Pre", insp:"Two preamps: a British transformer console and a tube vocal channel.",
-  pts:["73: transformer colour with a three-band EQ on switched frequencies","VB: tube preamp, EQ and optical compression in one strip","Order switch, high-pass filter, harmonics meter"]},
- {id:"eq", c:"#3cc8f0", name:"EQ", insp:"Surgical dynamic EQ followed by a broad passive tube EQ.",
-  pts:["8 bands with dynamic mode, slope filters and a live spectrum analyzer","Highlights resonances and clashes with the beat","1A: broad passive curves for weight and air after saturation"]},
- {id:"comp", c:"#41d98a", name:"Comp", insp:"A soft gate, then a fast FET compressor and a smooth opto leveller in series.",
-  pts:["Gate removes room noise before compression raises it","76: 20 µs to 0.8 ms attack, ratios 4, 8, 12, 20 and all-buttons mode","2A: optical leveller with program-dependent release"]},
- {id:"ds", c:"#a26bff", name:"DS", insp:"De-esser that tells an S from a bright vowel.",
-  pts:["5 ms lookahead so sibilants are caught before they pass","Split mode treats only the sibilant band, wide mode dips the whole voice","Listen button to hear exactly what is removed"]},
- {id:"sat", c:"#ff3d6e", name:"Sat", insp:"Six retro colour modules dosed by one magnitude knob.",
-  pts:["Noise, wobble, distortion, digital, magnetic tape and space","Tube, tape and transistor drive, oversampled ×4","Frequency focus to aim the saturation where it should bite"]},
- {id:"dbl", c:"#4f7dff", name:"Dbl", insp:"Doubler and choir generator for width and stacks.",
-  pts:["Two doubled takes placed on a stereo stage","Up to 8 choir voices with pitch shift, spread and chorus","Detune and timing variation for a natural double"]},
- {id:"fx", c:"#2fd3c0", name:"FX", insp:"Space and movement, kept behind the voice.",
-  pts:["Vintage algorithmic reverb with modulated tail","Tempo-synced delay with ducking, tape and analog character","Chorus, lo-fi and pitch bend"]},
- {id:"limit", c:"#8fc8ff", name:"Limit", insp:"Final true-peak limiter with loudness metering.",
-  pts:["True-peak detection with ×4 oversampling","Six styles, from transparent to aggressive","Momentary, short-term and integrated LUFS"]}
-];
-const flow=document.querySelector(".flow"), face=document.getElementById("face");
-const dn=document.getElementById("d-name"), di=document.getElementById("d-insp"), dl=document.getElementById("d-list");
-const btns=STAGES.map((s,i)=>{
-  if(i) {const a=document.createElement("span");a.className="arrow";a.textContent="›";a.setAttribute("aria-hidden","true");flow.appendChild(a);}
-  const b=document.createElement("button");
-  b.type="button";b.role="tab";b.style.setProperty("--c",s.c);
-  b.innerHTML=`<i></i>${s.name.toUpperCase()}`;
-  b.onclick=()=>show(i,true);
-  b.onkeydown=e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();const n=(i+(e.key==="ArrowRight"?1:STAGES.length-1))%STAGES.length;show(n,true);btns[n].focus();}};
-  flow.appendChild(b);return b;
-});
-const FACES={"tune": [["tune", "Pitch correction"], ["tune-advanced", "Advanced settings"]], "rider": [["rider-panel", "Rider close-up"], ["pre-rider", "Rider in the plugin"]], "pre": [["pre", "73 and VB preamps"]], "eq": [["eq-dynamic", "Dynamic band editing"], ["eq-sidechain", "Clash view against the beat"], ["eq-resonance", "Resonance detection"]], "comp": [["comp", "Gate, 76 and 2A"]], "ds": [["ds", "De-esser"]], "sat": [["sat", "Six colour modules"]], "dbl": [["dbl", "Doubler and choir"]], "fx": [["fx-reverb", "Reverb"], ["fx-delay", "Delay"], ["fx-chorus", "Chorus"], ["fx-lofi", "Lo-fi"], ["fx-bender", "Bender"]], "limit": [["limit", "True-peak limiter"]]};
-Object.values(FACES).flat().forEach(([f])=>{const im=new Image();im.src=`img/${f}.webp`;});
-const views=document.getElementById("views");
-function showFace(f,cap,s){face.src=`img/${f}.webp`;face.alt=`Hannibal Control, ${s.name}: ${cap}`;views.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f));}
-function show(i){
-  const s=STAGES[i];
-  btns.forEach((b,k)=>{b.setAttribute("aria-selected",k===i);b.tabIndex=k===i?0:-1;});
-  document.documentElement.style.setProperty("--accent",s.c);
-  const fs=FACES[s.id];
-  views.innerHTML=fs.length>1?fs.map(([f,cap])=>`<button type="button" data-f="${f}" aria-pressed="false"><img src="img/${f}.webp" alt="" width="1220" height="700"><span>${cap}</span></button>`).join(""):"";
-  views.querySelectorAll("button").forEach((b,k)=>b.onclick=()=>showFace(fs[k][0],fs[k][1],s));
-  showFace(fs[0][0],fs[0][1],s);
-  dn.textContent=s.name; di.textContent=s.insp;
-  dl.innerHTML=s.pts.map(p=>`<li>${p}</li>`).join("");
-}
-show(0);
-const gal=document.getElementById("gallery"),zoom=document.getElementById("zoom");
-STAGES.forEach(st=>FACES[st.id].forEach(([f,cap])=>{const b=document.createElement("button");b.type="button";
- b.innerHTML=`<img src="img/${f}.webp" width="1220" height="700" loading="lazy" alt="Hannibal Control, ${st.name}: ${cap}"><span>${cap}<small>${st.name}</small></span>`;
- b.onclick=()=>{document.getElementById("zoom-img").src=`img/${f}.webp`;document.getElementById("zoom-img").alt=`${st.name}: ${cap}`;document.getElementById("zoom-cap").textContent=`${st.name} · ${cap}`;zoom.showModal();};
- gal.appendChild(b);}));
-zoom.addEventListener("click",e=>{if(e.target===zoom)zoom.close();});
-
-/* Settings: PayPal payment link, demo download page and contact address. */
-const PAYPAL_URL="https://www.paypal.me/hannibalcontrol/25USD";
-const DEMO_URL="download/Hannibal-Vocal-Chain-Windows-Setup.exe";
-const CONTACT_EMAIL="hannibalaudiocontrol@gmail.com";
-if(DEMO_URL){document.querySelectorAll(".demo").forEach(a=>{a.href=DEMO_URL;a.hidden=false;});}
-if(PAYPAL_URL){document.querySelectorAll(".buy").forEach(a=>{a.href=PAYPAL_URL;a.target="_blank";a.rel="noopener";a.removeAttribute("aria-disabled");a.textContent="Buy with PayPal";});
-  document.getElementById("buy-note").textContent=DEMO_URL?"Pay with PayPal (balance or card). Your personal licence key is sent to your PayPal email within 24 hours. It unlocks the free demo: no reinstall needed.":"Pay with PayPal (balance or card). Your download link and personal licence key are sent to your PayPal email within 24 hours.";}
-if(CONTACT_EMAIL){const m=document.getElementById("mail");m.href="mailto:"+CONTACT_EMAIL;m.textContent=CONTACT_EMAIL;document.getElementById("mail-line").hidden=false;}
-</script>
 </body>
 </html>
